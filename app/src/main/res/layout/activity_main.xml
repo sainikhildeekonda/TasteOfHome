@@ -21,7 +21,7 @@
     <ImageView
         android:layout_width="77dp"
         android:layout_height="96dp"
-        android:src="@drawable/AppIcon"
+        android:src="@drawable/appicon"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="140dp"/>
 

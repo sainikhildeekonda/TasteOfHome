@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "456163885768",
+    "firebase_url": "https://taste-of-home-fde4b.firebaseio.com",
+    "project_id": "taste-of-home-fde4b",
+    "storage_bucket": "taste-of-home-fde4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456163885768:android:ad3a892856452d1cf59bfd",
+        "android_client_info": {
+          "package_name": "com.example.tasteofhome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456163885768-mrs9ggpg7ucbtlso1ljrsfp0v0nt7gvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTm9vg3_sRCBo8hMsTjbCXZfWJRLiTtQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456163885768-mrs9ggpg7ucbtlso1ljrsfp0v0nt7gvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
