@@ -18,11 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    //comments by Sai Nikhil
-    /*declaring variable used in the MainActivity XML file in resource layout*/
     private EditText emailbox, passwordbox;
     private Button loginbutton, registerbutton;
-    //as we are using firebase authentication we have declared an instance of FirebaseAuth
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
         loginbutton = findViewById(R.id.btnlogin);
         registerbutton = findViewById(R.id.btnregister);
 
-        //here we have initialized the FirebaseAuth instance
         firebaseAuth = FirebaseAuth.getInstance();
-        //now we have to check if user is currently signed in or not. if signed in then every time we open the app we dont see the login page.
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user!= null)
         {
@@ -44,30 +39,29 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        else //when user is not signed in
+        else
         {
             loginbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final String username1 = emailbox.getText().toString().trim(); // gets username entered as string. trim method is used to remove spaces if user enters by mistake.
-                    final String password1 = passwordbox.getText().toString().trim();//gets password entered
-                    if (emailbox.getText().toString().trim().length() == 0 || passwordbox.getText().toString().trim().length() == 0)//if edit text fields edit box and pass box are empty
-                         {
-                        Toast.makeText(MainActivity.this, "Invalid details", Toast.LENGTH_SHORT).show(); //toast a message which looks but like a popup message
+                    final String username1 = emailbox.getText().toString().trim();
+                    final String password1 = passwordbox.getText().toString().trim();
+                    if (emailbox.getText().toString().trim().length() == 0 || passwordbox.getText().toString().trim().length() == 0) {
+                        Toast.makeText(MainActivity.this, "Invalid details", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         firebaseAuth.signInWithEmailAndPassword(username1, password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(MainActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();//toast a message that login was successful
-                                    Intent intent = new Intent(MainActivity.this, HomePage.class); //move from this activity to HomePage using the concept intents
+                                    Toast.makeText(MainActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MainActivity.this, HomePage.class);
                                     startActivity(intent);
-                                    finish(); // this method should only be used when user doesnt want to come back to this page again. its like killing the acticity and when user goes back this page wont showup
+                                    finish();
 
                                 }
                                 else {
-                                    Toast.makeText(MainActivity.this, "Invalid details", Toast.LENGTH_SHORT).show();//whe user login credentials are wrong
+                                    Toast.makeText(MainActivity.this, "Invalid details", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
