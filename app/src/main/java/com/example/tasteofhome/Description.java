@@ -18,8 +18,8 @@ public class Description extends AppCompatActivity {
 
         description=findViewById(R.id.description1);
 
-       String nikhil=getIntent().getStringExtra("description");
-        description.setText(nikhil);
+       String info=getIntent().getStringExtra("description");
+        description.setText(info);
     }
 
     @Override
