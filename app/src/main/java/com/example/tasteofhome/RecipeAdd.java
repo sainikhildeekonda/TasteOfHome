@@ -31,7 +31,48 @@ public class RecipeAdd extends AppCompatActivity {
         db= FirebaseFirestore.getInstance();
 
 
-        
+        addrecipe.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+                if (recipename.getText().toString().trim().length() == 0 || recipeprocedure.getText().toString().trim().length() ==0)
+                {
+                    Toast.makeText(RecipeAdd.this, "please fill correct details", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    addData(recipename.getText().toString(),recipeprocedure.getText().toString());
+                    Toast.makeText(RecipeAdd.this, "Recipe added successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RecipeAdd.this, HomePage.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+
+            public void addData(String recipename,String recipeprocedure)
+            {
+                ContentRecipeAdd contentRecipeAdd=new ContentRecipeAdd(recipename,recipeprocedure);
+                db.collection("recipe").add(contentRecipeAdd).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(getApplicationContext(), "Recipe Added successfully", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "please fill correct details!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+
     }
 
 }
