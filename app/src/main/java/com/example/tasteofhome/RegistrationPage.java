@@ -32,32 +32,32 @@ public class RegistrationPage extends AppCompatActivity {
         create= findViewById(R.id.btncreate);
         firebaseAuth =FirebaseAuth.getInstance();
 
-
+// when user clicks on create button
         create.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
 
-                final String username=emailbox.getText().toString().trim();
-                final String password=passwordbox.getText().toString().trim();
-                if (emailbox.getText().toString().trim().length() == 0 || passwordbox.getText().toString().trim().length() ==0)
+                final String username=emailbox.getText().toString().trim(); //gets user desired username
+                final String password=passwordbox.getText().toString().trim();// gets user desired password
+                if (emailbox.getText().toString().trim().length() == 0 || passwordbox.getText().toString().trim().length() ==0)//when edit text fields are blank
                 {
-                    Toast.makeText(RegistrationPage.this, "please fill correct details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationPage.this, "please fill correct details", Toast.LENGTH_SHORT).show(); // toast error message
 
                 }
-                else
+                else // if user filled something
                 {
                     firebaseAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>()
                     {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task)
                         {
-                            if (task.isSuccessful())
+                            if (task.isSuccessful()) //when created
                             {
                                 Toast.makeText(RegistrationPage.this, "Registration successful", Toast.LENGTH_SHORT).show();
                                 finish();
-                                Intent intent = new Intent(RegistrationPage.this, MainActivity.class);
+                                Intent intent = new Intent(RegistrationPage.this, MainActivity.class); //moving back to login page(MainActivity.class)
                                 startActivity(intent);
 
                             }
