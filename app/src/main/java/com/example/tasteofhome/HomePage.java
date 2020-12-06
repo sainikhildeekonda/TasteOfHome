@@ -112,7 +112,8 @@ public class HomePage extends AppCompatActivity {
     private void info()
     {
 
-      
+      Intent intent = new Intent(Home.this, AppInfo.class);
+        startActivity(intent);
 
 
     }
