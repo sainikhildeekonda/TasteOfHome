@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,6 +35,7 @@ public class HomePage extends AppCompatActivity {
 
     private ListView listitem;
     private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
     private ArrayAdapter adapter;
     private final ArrayList<String> list=new ArrayList<>();
     private ArrayList<String> data= new ArrayList<>();
@@ -47,6 +49,7 @@ public class HomePage extends AppCompatActivity {
         adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
         listitem.setAdapter(adapter);
         db=FirebaseFirestore.getInstance();
+        firebaseAuth=FirebaseAuth.getInstance();
 
         db.collection("recipe").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -105,17 +108,15 @@ public class HomePage extends AppCompatActivity {
     private void Logout()
     {
         firebaseAuth.signOut();
-        Intent intent = new Intent(Home.this, MainActivity.class);
+        Intent intent = new Intent(HomePage.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
     private void info()
     {
 
-      Intent intent = new Intent(Home.this, AppInfo.class);
+      Intent intent = new Intent(HomePage.this, AppInfo.class);
         startActivity(intent);
-
-
     }
     private void NewRecipe()
     {
