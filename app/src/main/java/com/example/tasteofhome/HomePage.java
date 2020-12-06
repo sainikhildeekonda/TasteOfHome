@@ -104,7 +104,7 @@ public class HomePage extends AppCompatActivity {
     }
     private void Logout()
     {
-       
+        
     }
     private void info()
     {
@@ -115,7 +115,9 @@ public class HomePage extends AppCompatActivity {
     }
     private void NewRecipe()
     {
-        
+        Intent intent = new Intent(HomePage.this, RecipeAdd.class);
+        startActivity(intent);
+        finish();
     }
   
 }
