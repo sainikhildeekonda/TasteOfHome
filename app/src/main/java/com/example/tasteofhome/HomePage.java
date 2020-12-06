@@ -104,7 +104,10 @@ public class HomePage extends AppCompatActivity {
     }
     private void Logout()
     {
-        
+        firebaseAuth.signOut();
+        Intent intent = new Intent(Home.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
     private void info()
     {
