@@ -87,6 +87,36 @@ public class HomePage extends AppCompatActivity {
 
 
     }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.exit: Logout();
+                            break;
+            case R.id.newrecipe: NewRecipe();
+                                    break;
+            case R.id.appinfo: info();
+                                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    private void Logout()
+    {
+       
+    }
+    private void info()
+    {
+
+      
+
+
+    }
+    private void NewRecipe()
+    {
+        
+    }
   
 }
 
