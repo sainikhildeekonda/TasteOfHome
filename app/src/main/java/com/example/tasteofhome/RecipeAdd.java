@@ -10,15 +10,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tasteofhome.api_interfaces.JsonPlaceHolderApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class RecipeAdd extends AppCompatActivity {
     private EditText recipename,recipeprocedure;
     private Button addrecipe;
-    private FirebaseFirestore db;
+ //   private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,7 @@ public class RecipeAdd extends AppCompatActivity {
         recipeprocedure=findViewById(R.id.recipepro);
         addrecipe=findViewById(R.id.recipeadd);
 
-        db= FirebaseFirestore.getInstance();
+   //     db= FirebaseFirestore.getInstance();
 
 
         addrecipe.setOnClickListener(new View.OnClickListener()
@@ -44,19 +51,20 @@ public class RecipeAdd extends AppCompatActivity {
                 }
                 else
                 {
-                    addData(recipename.getText().toString(),recipeprocedure.getText().toString());
-                    Toast.makeText(RecipeAdd.this, "Recipe added successfully!", Toast.LENGTH_SHORT).show();
+                    addData();
+                    //Toast.makeText(RecipeAdd.this, "Recipe added successfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RecipeAdd.this, HomePage.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 }
             }
+        });
 
-
-            public void addData(String recipename,String recipeprocedure)
-            {
-                ContentRecipeAdd contentRecipeAdd=new ContentRecipeAdd(recipename,recipeprocedure);
+    }
+    void addData()
+    {
+               /* ContentRecipeAdd contentRecipeAdd=new ContentRecipeAdd(recipename,recipeprocedure);
                 db.collection("recipe").add(contentRecipeAdd).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -70,9 +78,31 @@ public class RecipeAdd extends AppCompatActivity {
 
                     }
                 });
+                */
+        String name = recipename.getText().toString().trim();
+        String procedure = recipeprocedure.getText().toString().trim();
+
+        ContentRecipeAdd post=new ContentRecipeAdd(name,procedure);
+
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
+        Call<ContentRecipeAdd> call=jsonPlaceHolderApi.addData(post);
+        call.enqueue(new Callback<ContentRecipeAdd>() {
+            @Override
+            public void onResponse(Call<ContentRecipeAdd> call, Response<ContentRecipeAdd> response) {
+
+                Toast.makeText(RecipeAdd.this, "Recipe Added to the list", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ContentRecipeAdd> call, Throwable t) {
+               // Toast.makeText(RecipeAdd.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
-
     }
-
 }

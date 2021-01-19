@@ -1,33 +1,31 @@
 package com.example.tasteofhome;
 
 public class ContentRecipeAdd {
-    public String recipename1;
-    public String recipepro1;
+    private String recipename;
+    private String recipeprocedure;
 
-    public ContentRecipeAdd()
-    {
-
+    public ContentRecipeAdd() {
     }
 
-    public ContentRecipeAdd(String recipename, String recipepro)
-    {
-        this.recipename1 = recipename;
-        this.recipepro1 = recipepro;
+
+    public ContentRecipeAdd(String recipename, String recipeprocedure) {
+        this.recipename = recipename;
+        this.recipeprocedure = recipeprocedure;
     }
 
-    public String getRecipename1() {
-        return recipename1;
+    public String getRecipename() {
+        return recipename;
     }
 
-    public void setRecipename1(String recipename1) {
-        this.recipename1 = recipename1;
+    public void setRecipename(String recipename) {
+        this.recipename = recipename;
     }
 
-    public String getRecipepro1() {
-        return recipepro1;
+    public String getRecipeprocedure() {
+        return recipeprocedure;
     }
 
-    public void setRecipepro1(String recipepro1) {
-        this.recipepro1 = recipepro1;
+    public void setRecipeprocedure(String recipeprocedure) {
+        this.recipeprocedure = recipeprocedure;
     }
 }

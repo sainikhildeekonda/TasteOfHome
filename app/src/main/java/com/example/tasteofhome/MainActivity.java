@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         //now we have to check if user is currently signed in or not. if signed in then every time we open the app we dont see the login page.
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
         if (user!= null)
         {
             Intent intent = new Intent(MainActivity.this,HomePage.class);
